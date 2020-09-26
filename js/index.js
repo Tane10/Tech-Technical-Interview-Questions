@@ -1,48 +1,3 @@
-const records = [{
-        user_id: 1,
-        device: "Windows 10",
-        action: "start",
-        date_actioned: 100
-    },
-    {
-        user_id: 2,
-        device: "OSX 15.4",
-        action: "start",
-        date_actioned: 200
-    },
-    {
-        user_id: 1,
-        device: "iPhone 8s",
-        action: "start",
-        date_actioned: 250
-    },
-    {
-        user_id: 1,
-        device: "Windows 10",
-        action: "stop",
-        date_actioned: 370
-    },
-    {
-        user_id: 1,
-        device: "iPhone 8s",
-        action: "stop",
-        date_actioned: 410
-    },
-    {
-        user_id: 2,
-        device: "OSX 15.4",
-        action: "stop",
-        date_actioned: 490
-    },
-    {
-        user_id: 3,
-        device: "Android",
-        action: "start",
-        date_actioned: 700
-    }
-];
-
-
 const checkBetweenDates = (min, max, value) => min <= value && value <= max;
 
 function getUsers(data, action, start_time, end_time) {
@@ -55,11 +10,27 @@ function getUsers(data, action, start_time, end_time) {
             }
         }
     });
-    return userIdArray
+
+    if (userIdArray.length === 0) {
+        return []
+    } else {
+
+        const userArraySort = userIdArray.sort((a, b) => {
+            return a - b
+        });
+
+        const fliteredUsers = userArraySort.filter((value, idx, array) => array.indexOf(value) === idx)
+        return fliteredUsers
+    }
+
+
 }
 
-
 function getPlaybackTime(id, records) {
+    if (id === undefined || records === undefined) {
+        throw new Error("Please add required parameters")
+    }
+
     let instanceArray = [];
 
     records.forEach(data => {
@@ -72,7 +43,12 @@ function getPlaybackTime(id, records) {
         return a - b
     });
 
-    return sortedArray[sortedArray.length - 1] - sortedArray[0]
+    if (sortedArray.length === 0) {
+        return 0
+    } else {
+        return sortedArray[sortedArray.length - 1] - sortedArray[0]
+    }
+
 }
 
-console.log(getPlaybackTime(1, records))
+export { checkBetweenDates, getUsers, getPlaybackTime }
