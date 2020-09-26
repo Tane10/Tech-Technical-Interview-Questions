@@ -26,7 +26,6 @@ def user_allowed_applications(id, app_dictionary, app_permissions,
                               user_permissions):
 
     final_obj = {"user_id": id, "application_permissions": []}
-    
 
     for user in user_permissions:
         get_user_id = user.get("user_id")
@@ -44,11 +43,11 @@ def user_allowed_applications(id, app_dictionary, app_permissions,
                         match_array.append(x)
 
                 final_obj["application_permissions"].append({
-                    "app_id": get_app_id,
-                    "features_allowed": match_array
+                    "app_id":
+                    get_app_id,
+                    "features_allowed":
+                    match_array
                 })
-
-
 
     return final_obj
 
@@ -83,6 +82,6 @@ user_permissions = [{
 }]
 
 a = user_allowed_applications(1, app_id_dictionary, app_permissions,
-                          user_permissions)
+                              user_permissions)
 
 print(a)

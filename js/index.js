@@ -42,9 +42,6 @@ const records = [{
     }
 ];
 
-// Write a (ES6) javascript function that takes in records (an array of all the database
-//     records), an action, and a start_time and end_time time window and returns all user ids
-//     that performed that action within that time window.
 
 const checkBetweenDates = (min, max, value) => min <= value && value <= max;
 
@@ -62,51 +59,20 @@ function getUsers(data, action, start_time, end_time) {
 }
 
 
-/**
- * user 1 
- * start window 100
- * stop window 370
- * total 270
- * 
- * start iphon 250
- * stop iphone 410
- * total 160
- * --------
- * totoal playback 430
- * -----------------
- * user start window 100
- * user start iphone 250
- * playback between 150
- * 
- * user stop windows 370
- * user stop iphone 410
- * playback bewteen 40 
- * 
+function getPlaybackTime(id, records) {
+    let instanceArray = [];
 
-
-
-
-
-
-
- * 
- * user 2
- * start 200
- * stop 490
- * total 690
- * 
- * user 3 
- * start 700
- * total 700
- */
-
-function getPlaybackTime(id, data) {
-    data.forEach((user) => {
-        if (id)
-
+    records.forEach(data => {
+        if (id === data.user_id) {
+            instanceArray.push(data.date_actioned)
+        }
     })
 
+    const sortedArray = instanceArray.sort((a, b) => {
+        return a - b
+    });
 
+    return sortedArray[sortedArray.length - 1] - sortedArray[0]
 }
+
 console.log(getPlaybackTime(1, records))
-    // console.log(getUsers(records, "start", 700, 900))
