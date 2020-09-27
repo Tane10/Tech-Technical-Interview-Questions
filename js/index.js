@@ -1,6 +1,7 @@
 const checkBetweenDates = (min, max, value) => min <= value && value <= max;
 
 function getUsers(data, action, start_time, end_time) {
+
     const userIdArray = [];
 
     data.forEach((user) => {
