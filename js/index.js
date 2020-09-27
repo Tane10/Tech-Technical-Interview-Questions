@@ -1,5 +1,9 @@
 const checkBetweenDates = (min, max, value) => min <= value && value <= max;
 
+const ascendingSort = (array) => array.sort((a, b) => {
+    return a - b;
+});
+
 function getUsers(data, action, start_time, end_time) {
 
     const userIdArray = [];
@@ -16,15 +20,13 @@ function getUsers(data, action, start_time, end_time) {
         return []
     } else {
 
-        const userArraySort = userIdArray.sort((a, b) => {
-            return a - b
-        });
+        const userArraySort = ascendingSort(userIdArray);
 
-        const fliteredUsers = userArraySort.filter((value, idx, array) => array.indexOf(value) === idx)
+        // filter duplicates from userArraySort
+        const fliteredUsers = userArraySort.filter((value, idx, array) => array.indexOf(value) === idx);
+
         return fliteredUsers
     }
-
-
 }
 
 function getPlaybackTime(id, records) {
@@ -40,9 +42,7 @@ function getPlaybackTime(id, records) {
         }
     })
 
-    const sortedArray = instanceArray.sort((a, b) => {
-        return a - b
-    });
+    const sortedArray = ascendingSort(instanceArray);
 
     if (sortedArray.length === 0) {
         return 0

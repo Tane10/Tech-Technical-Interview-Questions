@@ -9,12 +9,13 @@ def user_allowed_applications(id, app_dictionary, app_permissions,user_permissio
 
         if id == get_user_id:
             foundUser = True
+
             for app in app_permissions:
                 get_features_available = app.get("features_available")
                 get_app_id = app.get("app_id")
-
                 match_array = []
 
+                # checks if users features_allowed is in the features avaible 
                 for x in get_features_available:
                     if x in get_features_allowed:
                         match_array.append(x)
@@ -26,6 +27,7 @@ def user_allowed_applications(id, app_dictionary, app_permissions,user_permissio
                     match_array
                 })
 
+    # if user not found return application_permissions with app it and empty features_allowed array
     if (foundUser == False):
         for app in app_permissions:
             final_obj["application_permissions"].append({
