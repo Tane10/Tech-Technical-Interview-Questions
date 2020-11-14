@@ -1,4 +1,4 @@
-# Grip Tech Technical Interview Questions
+# Tech Technical Interview Questions
 
 ## Question 1
 
